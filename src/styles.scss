@@ -1,0 +1,41 @@
+$dark-theme-base: #51586b;
+$dark-theme-text-primary: #c7cfe2;
+
+$default-flex-size: 1;
+
+$fonts: Helvetica, Arial, sans-serif;
+
+@mixin reset-padding() {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  @include reset-padding();
+}
+
+.nav {
+  font-family: $fonts;
+  width: 100vw;
+  height: 8vh;
+  background-color: $dark-theme-base;
+  display: flex;
+}
+
+.title {
+  @include reset-padding();
+  flex-grow: 2;
+}
+
+.menu {
+  @include reset-padding();
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuItem {
+  list-style: none;
+  flex-grow: 1;
+}
