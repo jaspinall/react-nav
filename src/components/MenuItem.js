@@ -3,7 +3,7 @@ import React from 'react';
 const MenuItem = ( props ) => {
 
   return (
-    <li className="menuItem">{props.menuItemName}</li>
+    <li className="nav-links">{props.itemName}</li>
   );
 };
 

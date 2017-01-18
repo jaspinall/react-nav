@@ -17,7 +17,7 @@ html, body {
 .nav {
   font-family: $fonts;
   width: 100vw;
-  height: 8vh;
+  height: 50px;
   background-color: $dark-theme-base;
   display: flex;
 }
@@ -28,14 +28,46 @@ html, body {
 }
 
 .menu {
-  @include reset-padding();
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 1;
+  transition: 0.5s;
+  width: 0;
+  background-color: $dark-theme-base;
 }
 
 .menuItem {
-  list-style: none;
   flex-grow: 1;
+}
+
+.about {
+  height: 400px;
+  background-color: green;
+}
+
+.hamburger {
+  display: block;
+  height: 30px;
+  padding: 10px;
+}
+
+.nav-links {
+  color: $dark-theme-text-primary;
+  text-decoration: none;
+  list-style: none;
+}
+
+// desktop displayName
+@media (min-width: 600px) {
+
+  .hamburger {
+    display: none;
+  }
+
+  .menu {
+    @include reset-padding();
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
