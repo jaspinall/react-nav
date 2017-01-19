@@ -1,9 +1,9 @@
-$dark-theme-base: #51586b;
-$dark-theme-text-primary: #c7cfe2;
+$dark-theme-base: #0a090a;
+$dark-theme-text-primary: #d4d4d6;
 
 $default-flex-size: 1;
 
-$fonts: Helvetica, Arial, sans-serif;
+$fonts: 'Nunito Sans', Arial, sans-serif;
 
 @mixin reset-padding() {
   margin: 0;
@@ -18,24 +18,42 @@ html, body {
   font-family: $fonts;
   width: 100vw;
   height: 50px;
+  position: fixed;
+  top: 0;
   background-color: $dark-theme-base;
-  display: flex;
 }
 
 .title {
   @include reset-padding();
-  flex-grow: 2;
+}
+
+.desktopMenu {
+  display: none;
 }
 
 .menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
   z-index: 1;
-  transition: 0.5s;
-  width: 0;
+  height: 200px;
+  width: 100%;
+  transition:
+    transform 0.5s linear;
   background-color: $dark-theme-base;
 }
 
-.menuItem {
+.menu a {
+  vertical-align: bottom;
+  text-decoration: none;
   flex-grow: 1;
+}
+
+.menu li {
+  color: $dark-theme-text-primary;
+  list-style: none;
 }
 
 .about {
@@ -44,30 +62,37 @@ html, body {
 }
 
 .hamburger {
-  display: block;
-  height: 30px;
-  padding: 10px;
+  position: fixed;
+  right: 10px;
+  top: 12px;
+  height: 25px;
 }
 
-.nav-links {
-  color: $dark-theme-text-primary;
-  text-decoration: none;
-  list-style: none;
-}
 
-// desktop displayName
+// desktop display
 @media (min-width: 600px) {
 
   .hamburger {
     display: none;
   }
 
-  .menu {
-    @include reset-padding();
-    flex-grow: 1;
+  .nav {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  .mobile {
+    display: none;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .desktopMenu {
+    display: block;
+    background-color: green;
+    height: 200px;
+  }
 }

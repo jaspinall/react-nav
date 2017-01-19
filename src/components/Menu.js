@@ -2,11 +2,9 @@ import React from 'react';
 import MenuItem from './MenuItem';
 import { Link } from 'react-router';
 
-const Menu = ( props ) => {
+const MenuMobile = ({ display, routeInfo }) => {
 
-  console.log(props);
-
-  const menuItemsDivs = props.routeInfo.map(el => {
+  const menuItemsDivs = routeInfo.map(el => {
     if (el.type === 'react-router') {
       return (<Link to={el.link} className="menuItem">
         <MenuItem itemName={el.displayName}/>
@@ -18,11 +16,22 @@ const Menu = ( props ) => {
     }
   });
 
+  const transform = display ? 'translateY(0)' : 'translateY(-200px)';
+
+  const divStyles = {
+    transform,
+  };
+
   return (
-    <ul className='menu'>
-      {menuItemsDivs}
-    </ul>
+    <div>
+      <ul className="menu" style={divStyles}>
+          {menuItemsDivs}
+      </ul>
+      <ul className="desktopMenu">
+        {menuItemsDivs}
+      </ul>
+    </div>
   );
 };
 
-export default Menu;
+export default MenuMobile;
