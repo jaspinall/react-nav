@@ -9,24 +9,21 @@ require('./styles/styles.scss');
 class App extends Component {
 
   render() {
-    const navOptions = {
-      companyName: 'my company',
-      routeInfo: [
-        { displayName: 'ABOUT',
-          link: '/about',
-        },
-        { displayName: 'HOME',
-          link: '/home',
-        },
-        { displayName: 'CONTACT',
-          link: 'https://www.google.com/',
-        },
-      ],
-    };
+    const routeInfo = [
+      { displayName: 'ABOUT',
+        link: '/about',
+      },
+      { displayName: 'HOME',
+        link: '/home',
+      },
+      { displayName: 'CONTACT',
+        link: 'https://www.google.com/',
+      },
+    ];
 
     return (
       <div>
-        <Navbar navOptions={navOptions} />
+        <Navbar routeInfo={routeInfo} />
         {this.props.children}
       </div>
     );

@@ -1,10 +1,9 @@
 import React from 'react';
 
-const MenuItem = ( props ) => {
+const MenuItem = ({ itemName }) => <li className="navListItems">{itemName}</li>;
 
-  return (
-    <li className="navListItems">{props.itemName}</li>
-  );
+MenuItem.propTypes = {
+  itemName: React.PropTypes.string.isRequired,
 };
 
 export default MenuItem;

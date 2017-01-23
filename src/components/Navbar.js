@@ -11,7 +11,7 @@ class Navbar extends Component {
     this.state = {
       toggled: false,
       icon: hamburger,
-    }
+    };
     this.menuToggle = this.menuToggle.bind(this);
   }
 
@@ -26,12 +26,28 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div className='nav'>
-        <Menu display={this.state.toggled} routeInfo={this.props.navOptions.routeInfo} toggleList={this.menuToggle}/>
-        <img className="hamburger" onClick={this.menuToggle} src={this.state.icon}></img>
+      <div className="nav">
+        <Menu
+          display={this.state.toggled}
+          routeInfo={this.props.routeInfo}
+          toggleList={this.menuToggle}
+        />
+        <img
+          onClick={this.menuToggle}
+          className="hamburger"
+          alt="open menu button"
+          src={this.state.icon}
+        />
       </div>
     );
   }
 }
+
+Navbar.propTypes = {
+  routeInfo: React.PropTypes.arrayOf(React.PropTypes.shape({
+    displayName: React.PropTypes.string.isRequired,
+    link: React.PropTypes.string.isRequired,
+  })).isRequired,
+};
 
 export default Navbar;
