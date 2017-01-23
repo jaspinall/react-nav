@@ -1,22 +1,26 @@
 import React from 'react';
-import MenuItem from './MenuItem';
 import { Link } from 'react-router';
+import MenuItem from './MenuItem';
 
-const MenuMobile = ({ display, routeInfo }) => {
+const Menu = ({ display, routeInfo, toggleList }) => {
 
-  const menuItemsDivs = routeInfo.map(el => {
+  let linkItemCounter = 0;
+  let menuItemCounter = 0;
+
+  const menuItemsDivs = routeInfo.map((el) => {
+    menuItemCounter++;
+    linkItemCounter++;
     if (el.type === 'react-router') {
-      return (<Link to={el.link} className="menuItem">
-        <MenuItem itemName={el.displayName}/>
-      </Link>)
-    } else {
-      return (<a href={el.link} target='_blank' className="menuItem">
-        <MenuItem itemName={el.displayName}/>
-      </a>)
+      return (<Link to={el.link} className="menuItem" onClick={toggleList} key={linkItemCounter}>
+        <MenuItem itemName={el.displayName}  key={menuItemCounter}/>
+      </Link>);
     }
+    return (<a href={el.link} target="_blank" rel="noopener noreferrer" className="menuItem" key={linkItemCounter}>
+      <MenuItem itemName={el.displayName} onClick={toggleList} key={menuItemCounter}/>
+    </a>);
   });
 
-  const transform = display ? 'translateY(0)' : 'translateY(-200px)';
+  const transform = display ? 'translateY(0)' : 'translateY(-250px)';
 
   const divStyles = {
     transform,
@@ -25,7 +29,7 @@ const MenuMobile = ({ display, routeInfo }) => {
   return (
     <div>
       <ul className="menu" style={divStyles}>
-          {menuItemsDivs}
+        {menuItemsDivs}
       </ul>
       <ul className="desktopMenu">
         {menuItemsDivs}
@@ -34,4 +38,4 @@ const MenuMobile = ({ display, routeInfo }) => {
   );
 };
 
-export default MenuMobile;
+export default Menu;

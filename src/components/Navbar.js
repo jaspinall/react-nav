@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
-import Title from './Title';
 
 const hamburger = require('../images/hamburger.svg');
 const hamburgerClose = require('../images/hamburgerClose.svg');
@@ -11,9 +10,9 @@ class Navbar extends Component {
     super();
     this.state = {
       toggled: false,
-      icon: hamburger
+      icon: hamburger,
     }
-    this.menuToggle = this.menuToggle.bind(this)
+    this.menuToggle = this.menuToggle.bind(this);
   }
 
   menuToggle() {
@@ -26,12 +25,9 @@ class Navbar extends Component {
   }
 
   render() {
-    const displayTitle = this.props.navOptions.companyName !== undefined ? 'block' : 'none';
-
     return (
       <div className='nav'>
-        <Title styles={{display: {displayTitle}}}/>
-        <Menu display={this.state.toggled} routeInfo={this.props.navOptions.routeInfo}  />
+        <Menu display={this.state.toggled} routeInfo={this.props.navOptions.routeInfo} toggleList={this.menuToggle}/>
         <img className="hamburger" onClick={this.menuToggle} src={this.state.icon}></img>
       </div>
     );

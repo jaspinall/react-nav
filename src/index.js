@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
-import { Router, Route, hashHistory } from 'react-router'
-require('./styles.scss');
+import { Router, Route, hashHistory } from 'react-router';
+require('./styles/styles.scss');
 
 class App extends Component {
 
@@ -14,15 +14,12 @@ class App extends Component {
       routeInfo: [
         { displayName: 'ABOUT',
           link: '/about',
-          type: 'react-router',
         },
         { displayName: 'HOME',
           link: '/home',
-          type: 'react-router',
         },
         { displayName: 'CONTACT',
           link: 'https://www.google.com/',
-          type: 'external',
         },
       ],
     };
