@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
+import hamburger from '../images/hamburger.svg';
+import hamburgerClose from '../images/hamburgerClose.svg';
 
-const hamburger = require('../images/hamburger.svg');
-const hamburgerClose = require('../images/hamburgerClose.svg');
+require('../styles/navStyles.scss');
 
 class Navbar extends Component {
 
@@ -37,7 +38,7 @@ class Navbar extends Component {
           className="hamburger"
           alt="open menu button"
           src={this.state.icon}
-        />
+          />
       </div>
     );
   }

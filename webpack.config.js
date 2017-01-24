@@ -1,8 +1,14 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path');
 
 module.exports = {
+  context: path.join(__dirname),
   entry: './src/index.js',
-  output: { path: __dirname + '/build', filename: 'bundle.js' },
+  output: {
+    path: path.join(__dirname, '/build'),
+    filename: 'index.js',
+    libraryTarget: 'umd',
+    library: 'Navbar',
+  },
   module: {
     loaders: [
       {
@@ -15,15 +21,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader"),
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(jpg|png|svg)$/,
+        test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'file',
       },
     ],
   },
-  plugins: [
-    new ExtractTextPlugin('navStyles.css'),
-  ],
 };
