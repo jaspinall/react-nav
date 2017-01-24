@@ -1,11 +1,11 @@
-# react-nav
-A lightweight responsive navbar for React. react-nav can be used with or without [react-router](https://github.com/ReactTraining/react-router).
+# reactnav
+A lightweight responsive navbar for React. reactnav can be used with or without [react-router](https://github.com/ReactTraining/react-router).
 
 ### Installation
 
 Using [npm](https://www.npmjs.com/):
 
-    $ npm install --save react-nav
+    $ npm install --save reactnav
     
 ### Getting Started
 
