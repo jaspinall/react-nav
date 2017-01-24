@@ -92,21 +92,18 @@
 	  _createClass(App, [{
 	    key: 'render',
 	    value: function render() {
-	      var navOptions = {
-	        companyName: 'my company',
-	        routeInfo: [{ displayName: 'ABOUT',
-	          link: '/about'
-	        }, { displayName: 'HOME',
-	          link: '/home'
-	        }, { displayName: 'CONTACT',
-	          link: 'https://www.google.com/'
-	        }]
-	      };
+	      var routeInfo = [{ displayName: 'ABOUT',
+	        link: '/about'
+	      }, { displayName: 'HOME',
+	        link: '/home'
+	      }, { displayName: 'CONTACT',
+	        link: 'https://www.google.com/'
+	      }];
 
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Navbar2.default, { navOptions: navOptions }),
+	        _react2.default.createElement(_Navbar2.default, { routeInfo: routeInfo }),
 	        this.props.children
 	      );
 	    }
@@ -21623,14 +21620,30 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'nav' },
-	        _react2.default.createElement(_Menu2.default, { display: this.state.toggled, routeInfo: this.props.navOptions.routeInfo, toggleList: this.menuToggle }),
-	        _react2.default.createElement('img', { className: 'hamburger', onClick: this.menuToggle, src: this.state.icon })
+	        _react2.default.createElement(_Menu2.default, {
+	          display: this.state.toggled,
+	          routeInfo: this.props.routeInfo,
+	          toggleList: this.menuToggle
+	        }),
+	        _react2.default.createElement('img', {
+	          onClick: this.menuToggle,
+	          className: 'hamburger',
+	          alt: 'open menu button',
+	          src: this.state.icon
+	        })
 	      );
 	    }
 	  }]);
 
 	  return Navbar;
 	}(_react.Component);
+
+	Navbar.propTypes = {
+	  routeInfo: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+	    displayName: _react2.default.PropTypes.string.isRequired,
+	    link: _react2.default.PropTypes.string.isRequired
+	  })).isRequired
+	};
 
 	exports.default = Navbar;
 
@@ -21661,13 +21674,26 @@
 	      routeInfo = _ref.routeInfo,
 	      toggleList = _ref.toggleList;
 
-
 	  var linkItemCounter = 0;
 	  var menuItemCounter = 0;
 
-	  var menuItemsDivs = routeInfo.map(function (el) {
-	    menuItemCounter++;
-	    linkItemCounter++;
+	  // check whether the links provided are external links or React Router links
+	  var regex = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/g;
+
+	  var parsedRoutes = routeInfo.map(function (route) {
+	    var newRoute = Object.assign({}, route);
+	    if (!route.link.match(regex)) {
+	      newRoute.type = 'react-router';
+	    } else {
+	      newRoute.type = 'external';
+	    }
+	    return newRoute;
+	  });
+
+	  // generate an array of menu item divs
+	  var menuItemsDivs = parsedRoutes.map(function (el) {
+	    menuItemCounter += 1;
+	    linkItemCounter += 1;
 	    if (el.type === 'react-router') {
 	      return _react2.default.createElement(
 	        _reactRouter.Link,
@@ -21677,11 +21703,18 @@
 	    }
 	    return _react2.default.createElement(
 	      'a',
-	      { href: el.link, target: '_blank', rel: 'noopener noreferrer', className: 'menuItem', key: linkItemCounter },
+	      {
+	        href: el.link,
+	        target: '_blank',
+	        rel: 'noopener noreferrer',
+	        className: 'menuItem',
+	        key: linkItemCounter
+	      },
 	      _react2.default.createElement(_MenuItem2.default, { itemName: el.displayName, onClick: toggleList, key: menuItemCounter })
 	    );
 	  });
 
+	  // show or hide the menu
 	  var transform = display ? 'translateY(0)' : 'translateY(-250px)';
 
 	  var divStyles = {
@@ -21702,6 +21735,15 @@
 	      menuItemsDivs
 	    )
 	  );
+	};
+
+	Menu.propTypes = {
+	  routeInfo: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
+	    displayName: _react2.default.PropTypes.string.isRequired,
+	    link: _react2.default.PropTypes.string.isRequired
+	  })).isRequired,
+	  toggleList: _react2.default.PropTypes.func.isRequired,
+	  display: _react2.default.PropTypes.bool.isRequired
 	};
 
 	exports.default = Menu;
@@ -26754,13 +26796,17 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var MenuItem = function MenuItem(props) {
-
+	var MenuItem = function MenuItem(_ref) {
+	  var itemName = _ref.itemName;
 	  return _react2.default.createElement(
 	    "li",
 	    { className: "navListItems" },
-	    props.itemName
+	    itemName
 	  );
+	};
+
+	MenuItem.propTypes = {
+	  itemName: _react2.default.PropTypes.string.isRequired
 	};
 
 	exports.default = MenuItem;

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
 import { Router, Route, hashHistory } from 'react-router';
-require('./styles/styles.scss');
+require('./styles/navStyles.scss');
 
 class App extends Component {
 

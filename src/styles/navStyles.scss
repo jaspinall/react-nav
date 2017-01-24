@@ -60,9 +60,14 @@ html, body {
   list-style: none;
 }
 
+.home {
+  height: 100vh;
+  background-color: lavender;
+}
+
 .about {
-  height: 400px;
-  background-color: green;
+  height: 100vh;
+  background-color: turquoise;
 }
 
 .hamburger {
