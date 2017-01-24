@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Menu from './Menu';
-import hamburger from '../images/hamburger.svg';
-import hamburgerClose from '../images/hamburgerClose.svg';
+import Hamburger from '../images/hamburger.svg';
+import HamburgerClose from '../images/hamburgerClose.svg';
 
 require('../styles/navStyles.scss');
 
@@ -11,34 +11,30 @@ class Navbar extends Component {
     super();
     this.state = {
       toggled: false,
-      icon: hamburger,
     };
     this.menuToggle = this.menuToggle.bind(this);
   }
 
   menuToggle() {
     const toggled = !this.state.toggled;
-    const icon = toggled === true ? hamburgerClose : hamburger;
     this.setState({
       toggled,
-      icon,
     });
   }
 
   render() {
+    const icon = this.state.toggled ?
+    <HamburgerClose className="menuClose" onClick={this.menuToggle}/> :
+    <Hamburger className="hamburger" onClick={this.menuToggle}/>;
+
     return (
       <div className="nav">
+        {icon}
         <Menu
           display={this.state.toggled}
           routeInfo={this.props.routeInfo}
           toggleList={this.menuToggle}
         />
-        <img
-          onClick={this.menuToggle}
-          className="hamburger"
-          alt="open menu button"
-          src={this.state.icon}
-          />
       </div>
     );
   }

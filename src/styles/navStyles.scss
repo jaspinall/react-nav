@@ -60,17 +60,15 @@ html, body {
   list-style: none;
 }
 
-.home {
-  height: 100vh;
-  background-color: lavender;
-}
-
-.about {
-  height: 100vh;
-  background-color: turquoise;
-}
-
 .hamburger {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  top: 12px;
+  height: 25px;
+}
+
+.menuClose {
   position: absolute;
   z-index: 2;
   right: 10px;
@@ -83,6 +81,10 @@ html, body {
 @media (min-width: 600px) {
 
   .hamburger {
+    display: none;
+  }
+
+  .menuClose {
     display: none;
   }
 
